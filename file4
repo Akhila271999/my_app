@@ -1,0 +1,17 @@
+def count_votes(votes):
+    vote_count = {}
+    for candidate in votes:
+        if candidate in vote_count:
+            vote_count[candidate] += 1
+        else:
+            vote_count[candidate] = 1
+    return vote_count
+
+# Example usage
+votes = ["Candidate A", "Candidate B", "Candidate A", "Candidate C", "Candidate B", "Candidate A"]
+result = count_votes(votes)
+
+print("Vote Count:")
+for candidate, count in result.items():
+    print(f"{candidate}: {count}")
+
