@@ -1,0 +1,100 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int grade;
+    private String section;
+
+    public Student(String name, int grade, String section) {
+        this.name = name;
+        this.grade = grade;
+        this.section = section;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public String getSection() {
+        return section;
+    }
+}
+
+class School {
+    private String name;
+    private List<Student> students;
+
+    public School(String name) {
+        this.name = name;
+        this.students = new ArrayList<>();
+    }
+
+    public void enrollStudent(Student student) {
+        students.add(student);
+        System.out.println(student.getName() + " enrolled in " + name);
+    }
+
+    public void listStudents() {
+        System.out.println("Students enrolled in " + name + ":");
+        for (Student student : students) {
+            System.out.println(student.getName() + " - Grade: " + student.getGrade() + " - Section: " + student.getSection());
+        }
+    }
+}
+
+public class SchoolManagementSystem {
+    public static void main(String[] args) {
+        School school = new School("ABC School");
+
+        Scanner scanner = new Scanner(System.in);
+
+        boolean done = false;
+        while (!done) {
+            System.out.println("Select an option:");
+            System.out.println("1. Enroll Student");
+            System.out.println("2. List Students");
+            System.out.println("3. Exit");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    scanner.nextLine();  // Consume the newline character
+                    System.out.println("Enter student name:");
+                    String name = scanner.nextLine();
+
+                    System.out.println("Enter student grade:");
+                    int grade = scanner.nextInt();
+
+                    scanner.nextLine();  // Consume the newline character
+                    System.out.println("Enter student section:");
+                    String section = scanner.nextLine();
+
+                    Student student = new Student(name, grade, section);
+                    school.enrollStudent(student);
+                    break;
+
+                case 2:
+                    school.listStudents();
+                    break;
+
+                case 3:
+                    done = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid option!");
+                    break;
+            }
+        }
+
+        scanner.close();
+    }
+}
+
