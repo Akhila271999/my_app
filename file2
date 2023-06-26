@@ -1,1 +1,27 @@
-sdfghjkldfghjklqwertyuiopzxcvbnm
+def calculate_average_alcohol_consumption(data):
+    total_consumption = 0
+    total_population = 0
+
+    for entry in data:
+        population = entry['population']
+        consumption = entry['alcohol_consumption']
+        total_population += population
+        total_consumption += population * consumption
+
+    if total_population > 0:
+        average_consumption = total_consumption / total_population
+        return average_consumption
+    else:
+        return 0
+
+# Example data (population in millions and alcohol consumption in liters per capita)
+state_data = [
+    {'state': 'State A', 'population': 10, 'alcohol_consumption': 5},
+    {'state': 'State B', 'population': 8, 'alcohol_consumption': 6},
+    {'state': 'State C', 'population': 12, 'alcohol_consumption': 4},
+    # Add more data for other states
+]
+
+average_consumption = calculate_average_alcohol_consumption(state_data)
+print("Average alcohol consumption in the state:", average_consumption, "liters per capita")
+
