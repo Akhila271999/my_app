@@ -1,0 +1,47 @@
+class User:
+    def __init__(self, username, email, password):
+        self.username = username
+        self.email = email
+        self.password = password
+
+class Movie:
+    def __init__(self, title, genre, duration, rating):
+        self.title = title
+        self.genre = genre
+        self.duration = duration
+        self.rating = rating
+
+class OTTApplication:
+    def __init__(self):
+        self.users = []
+        self.movies = []
+
+    def register_user(self, username, email, password):
+        user = User(username, email, password)
+        self.users.append(user)
+        print(f"User {username} registered successfully!")
+
+    def add_movie(self, title, genre, duration, rating):
+        movie = Movie(title, genre, duration, rating)
+        self.movies.append(movie)
+        print(f"Movie {title} added successfully!")
+
+    def display_movies(self):
+        print("Available Movies:")
+        for movie in self.movies:
+            print(f"Title: {movie.title}, Genre: {movie.genre}, Duration: {movie.duration}, Rating: {movie.rating}")
+
+# Create OTTApplication instance
+ott_app = OTTApplication()
+
+# Register users
+ott_app.register_user("user1", "user1@example.com", "password1")
+ott_app.register_user("user2", "user2@example.com", "password2")
+
+# Add movies
+ott_app.add_movie("Movie 1", "Action", "2h 30m", "4.5/5")
+ott_app.add_movie("Movie 2", "Comedy", "1h 45m", "3.8/5")
+
+# Display available movies
+ott_app.display_movies()
+
