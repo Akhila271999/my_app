@@ -1,0 +1,31 @@
+---
+
+- hosts: webservers
+  serial: 5
+
+  pre_tasks:
+
+    - name: take out of load balancer pool
+      ansible.builtin.command: /usr/bin/take_out_of_pool {{ inventory_hostname }}
+      delegate_to: 127.0.0.1
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: "{{ item }}"
+      loop:
+        - common
+        - webserver
+
+    - name: run any notified handlers
+      ansible.builtin.meta: flush_handlers
+
+    - name: test the configuration
+      ansible.builtin.include_role:
+        name: apply_testing_checks
+
+  post_tasks:
+
+    - name: add back to load balancer pool
+      ansible.builtin.command: /usr/bin/add_back_to_pool {{ inventory_hostname }}
+      delegate_to: 127.0.0.1
